@@ -2,9 +2,11 @@ package com.wei.wigellsushi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.math.BigDecimal;
 import java.util.List;
 @Entity
@@ -18,7 +20,7 @@ public class Bookings {
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "userID")
-    @JsonIgnore
+    @Valid
     private User user;
 
     @Column(name ="numberOfGuests")
@@ -31,8 +33,8 @@ public class Bookings {
 
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name ="bookingID")
+    @Valid
     private List<DishBooking> dishBooking;
-
 
     @Column(name ="isActive")
     private boolean isActive;
@@ -42,6 +44,7 @@ public class Bookings {
     @NotNull
     @Column(name ="totalPriceSek")
     private BigDecimal totalPriceSek;
+
 
     public Bookings() {
 
@@ -97,7 +100,7 @@ public class Bookings {
         this.roomID = roomID;
     }
 
-    public boolean isActive() {
+    public boolean getActive() {
         return isActive;
     }
 

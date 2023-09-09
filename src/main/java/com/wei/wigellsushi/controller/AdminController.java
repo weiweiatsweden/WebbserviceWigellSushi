@@ -6,16 +6,19 @@ import com.wei.wigellsushi.model.User;
 import com.wei.wigellsushi.service.MenyService;
 import com.wei.wigellsushi.service.RoomService;
 import com.wei.wigellsushi.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(value = "/api/v3/")
+@RequestMapping(value = "/api/v3")
+
+
 public class AdminController {
 
     @Autowired

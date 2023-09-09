@@ -2,36 +2,40 @@ package com.wei.wigellsushi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "dishBookings")
+@Table(name = "dishBooking")
 public class DishBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dishBookingID")
     private int dishBookingID;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "bookingID")
     @JsonIgnore
-    private Bookings bookingID;
+    private Bookings booking;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "dishID")
-    @JsonIgnore
-    private List<Dishes> dishList;
+    @Valid
+    private Dishes dish;
 
-    @Column(name ="quantity")
+    @Column(name = "quantity")
     private int quantity;
 
     public DishBooking() {
     }
 
-    public DishBooking(int dishBookingID, List<Dishes> dishList, int quantity) {
+    public DishBooking(int dishBookingID, Bookings booking, Dishes dish, int quantity) {
         this.dishBookingID = dishBookingID;
-        this.dishList = dishList;
+        this.booking = booking;
+        this.dish = dish;
         this.quantity = quantity;
     }
 
@@ -43,12 +47,20 @@ public class DishBooking {
         this.dishBookingID = dishBookingID;
     }
 
-    public List<Dishes> getDishList() {
-        return dishList;
+    public Bookings getBooking() {
+        return booking;
     }
 
-    public void setDishID(List<Dishes> dishID) {
-        this.dishList = dishList;
+    public void setBooking(Bookings booking) {
+        this.booking = booking;
+    }
+
+    public Dishes getDish() {
+        return dish;
+    }
+
+    public void setDish(Dishes dish) {
+        this.dish = dish;
     }
 
     public int getQuantity() {
