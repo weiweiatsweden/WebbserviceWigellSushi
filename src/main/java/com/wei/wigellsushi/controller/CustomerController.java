@@ -2,9 +2,11 @@ package com.wei.wigellsushi.controller;
 
 import com.wei.wigellsushi.model.Bookings;
 import com.wei.wigellsushi.model.Dishes;
+import com.wei.wigellsushi.model.TakeAwayOrders;
 import com.wei.wigellsushi.model.User;
 import com.wei.wigellsushi.service.BookingService;
 import com.wei.wigellsushi.service.MenyService;
+import com.wei.wigellsushi.service.TakeAwayService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,9 @@ public class CustomerController {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private TakeAwayService takeAwayService;
 
 
     @GetMapping(value = "/sushis")
@@ -46,4 +51,9 @@ public class CustomerController {
         return ResponseEntity.ok(bookingService.getAllBookings(userID));
     }
 
+    @PostMapping(value = "/orderTakeAway")
+    public ResponseEntity<TakeAwayOrders> takeAwayOrders(@Valid @RequestBody TakeAwayOrders takeAwayOrders) {
+
+        return ResponseEntity.ok(takeAwayService.placeTakeAwayOrder(takeAwayOrders));
+    }
 }

@@ -1,5 +1,6 @@
 package com.wei.wigellsushi.service;
 
+import com.wei.wigellsushi.Logging.Log4j;
 import com.wei.wigellsushi.exception.ResourceNotFoundException;
 import com.wei.wigellsushi.model.Room;
 import com.wei.wigellsushi.repository.RoomRepository;
@@ -21,11 +22,12 @@ public class RoomService implements RoomServiceInterface{
     @Override
     public Room updateRoom(Room room, int roomID) {
         Room room1 = roomRepository.getById(roomID);
-        if(room1.isBooked()){
+
             room1.setRoomName(room.getRoomName());
             room1.setMaxNumberOfGuests(room.getMaxNumberOfGuests());
+            room1.setIsBooked(room.getIsBooked());
             roomRepository.save(room1);
-        }
+        Log4j.logger.info("Admin changed room: " + room);
 
         return room1;
     }
@@ -33,11 +35,15 @@ public class RoomService implements RoomServiceInterface{
     @Override
     public Room addRoom(Room room) {
         roomRepository.save(room);
-        //Log4j.logger.info("Admin added room: " + room);
+        Log4j.logger.info("Admin added room: " + room);
         return room;
     }
 
-
+    @Override
+    public List<Room> getAllRooms() throws ResourceNotFoundException{
+        List<Room> getAllRoom = roomRepository.findAll();
+        return getAllRoom;
+    }
 
 
     @Override

@@ -40,6 +40,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v3/add-dish").hasRole("ADMIN")
                         .requestMatchers("/api/v3/deletedish").hasRole("ADMIN")
                         .requestMatchers("/api/v3/updateroom").hasRole("ADMIN")
+                        .requestMatchers("/api/v3/allrooms").hasRole("ADMIN")
 
 
                         .anyRequest().authenticated()

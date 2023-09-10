@@ -2,9 +2,11 @@ package com.wei.wigellsushi.controller;
 
 import com.wei.wigellsushi.model.Dishes;
 import com.wei.wigellsushi.model.Room;
+import com.wei.wigellsushi.model.TakeAwayOrders;
 import com.wei.wigellsushi.model.User;
 import com.wei.wigellsushi.service.MenyService;
 import com.wei.wigellsushi.service.RoomService;
+import com.wei.wigellsushi.service.TakeAwayService;
 import com.wei.wigellsushi.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class AdminController {
     @Autowired
     private RoomService roomService;
 
+    @Autowired
+    private TakeAwayService takeAwayService;
+
     public AdminController() {
     }
 
@@ -53,6 +58,18 @@ public class AdminController {
     @PutMapping (value = "/updateroom/{id}")
     public ResponseEntity<Room> updateRoom (@Valid @RequestBody Room room1, @PathVariable("id") int roomID){
         return ResponseEntity.ok(roomService.updateRoom(room1, roomID));
+    }
+
+    @GetMapping(value= "/allrooms")
+    public ResponseEntity<List<Room>> getAllRooms(){
+        return ResponseEntity.ok(roomService.getAllRooms());
+
+    }
+
+    @GetMapping(value= "/takeaway")
+    public ResponseEntity<List<TakeAwayOrders>> getAllTakeAwayOrders(){
+        return ResponseEntity.ok(takeAwayService.getAllTakeAwayOrders());
+
     }
 }
 

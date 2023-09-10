@@ -63,12 +63,12 @@ public class Room {
         this.maxNumberOfGuests = maxNumberOfGuests;
     }
 
-    public boolean isBooked() {
+    public boolean getIsBooked() {
         return isBooked;
     }
 
-    public void setBooked(boolean isBooked) {
-        isBooked = isBooked;
+    public void setIsBooked(boolean isBooked) {
+        this.isBooked = isBooked;
     }
 
     public String equipment() {

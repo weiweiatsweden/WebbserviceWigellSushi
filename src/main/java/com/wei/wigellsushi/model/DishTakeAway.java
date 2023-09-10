@@ -3,6 +3,7 @@ package com.wei.wigellsushi.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.List;
@@ -15,21 +16,26 @@ public class DishTakeAway {
     @Column(name = "dishTakeAwayID")
     private int dishTakeAwayID;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "dishID")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "takeAwayID")
     @JsonIgnore
-    private List<Dishes> dishList;
+    private TakeAwayOrders takeAwayOrders;
 
-    @Column(name ="quantity")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "dishID")
+    @Valid
+    private Dishes dish;
+
+    @Column(name = "quantity")
     private int quantity;
-
 
     public DishTakeAway() {
     }
 
-    public DishTakeAway(int dishTakeAwayID, List<Dishes> dishList, int quantity) {
+    public DishTakeAway(int dishTakeAwayID, TakeAwayOrders takeAwayOrders, Dishes dish, int quantity) {
         this.dishTakeAwayID = dishTakeAwayID;
-        this.dishList = dishList;
+        this.takeAwayOrders = takeAwayOrders;
+        this.dish = dish;
         this.quantity = quantity;
     }
 
@@ -41,12 +47,20 @@ public class DishTakeAway {
         this.dishTakeAwayID = dishTakeAwayID;
     }
 
-    public List<Dishes> getDishList() {
-        return dishList;
+    public TakeAwayOrders getTakeAwayOrders() {
+        return takeAwayOrders;
     }
 
-    public void setDishID(List<Dishes> dishID) {
-        this.dishList = dishList;
+    public void setTakeAwayOrders(TakeAwayOrders takeAwayOrders) {
+        this.takeAwayOrders = takeAwayOrders;
+    }
+
+    public Dishes getDish() {
+        return dish;
+    }
+
+    public void setDish(Dishes dish) {
+        this.dish = dish;
     }
 
     public int getQuantity() {
