@@ -10,7 +10,6 @@ public interface RoomServiceInterface {
     Room updateRoom (Room room, int roomID);
     Room addRoom(Room room);
     List<Room> getAllRooms();
-
     List<Room> getAvailableRoom();
 
 }

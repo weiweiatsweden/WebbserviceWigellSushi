@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//TODO log4j
+
 @Service
 public class RoomService implements RoomServiceInterface{
     @Autowired

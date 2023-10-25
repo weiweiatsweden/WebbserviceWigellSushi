@@ -47,31 +47,7 @@ public class WebSecurityConfig {
                 )
                 .csrf().disable()
                 .httpBasic(Customizer.withDefaults())
-                //.formLogin((form) -> form
-                  //      .loginPage("/login.html")
-                    //    .permitAll())
                 .logout((logout) -> logout.permitAll());
-
-/*• Lista kunder
-GET /api/v3/customers
-• Lägga till maträtt
-POST /api/v3/add-dish
-• Ta bort maträtt
-DELETE /api/v3/deletedish
-• Uppdatera lokal
-PUT /api/v3/updateroom
-
-
-
- Lista rätter
-GET /api/v3/sushis
-• Reservera lokal
-POST /api/v3/bookroom
-• Uppdatera bokning
-PUT /api/v3/updatebooking
-• Se tidigare och aktiva bokningar
-GET /api/v3/mybookings/{id}
- */
 
         return http.build();
     }
